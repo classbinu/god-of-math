@@ -15,13 +15,25 @@
   </head>
   <body>
     <div id="app">
-      <div class="flex justify-end m-4">
-        <button class="btn btn-xs btn-error" @click="reset()">Reset</button>
+      <div class="flex justify-center my-8" v-show="alert">
+        <div v-if="isAnswer === 'ready'" class="badge badge-warning badge-lg">
+          문제를 풀어주세요 🧑‍🏫
+        </div>
+        <div v-else-if="isAnswer" class="badge badge-success badge-lg">
+          맞았습니다 😀
+        </div>
+        <div v-else class="badge badge-error badge-lg">틀렸습니다 🥵</div>
       </div>
 
       <div class="divider">Score</div>
       <div class="text-center">
         <p class="text-6xl">{{ score }}</p>
+      </div>
+
+      <div class="flex justify-center">
+        <button class="btn btn-outline btn-xs btn-error mt-4" @click="reset()">
+          Reset
+        </button>
       </div>
 
       <div class="divider">Question</div>
@@ -48,19 +60,6 @@
           </li>
         </ul>
       </div>
-
-      <div class="toast toast-top toast-start" v-show="alert">
-        <div v-if="isAnswer" class="alert alert-success">
-          <div>
-            <span>맞았습니다😀</span>
-          </div>
-        </div>
-        <div v-else class="alert alert-error">
-          <div>
-            <span>틀렸습니다🥵</span>
-          </div>
-        </div>
-      </div>
     </div>
   </body>
 </html>
@@ -78,8 +77,8 @@
         input: "",
         log: "",
         history: [],
-        isAnswer: false,
-        alert: false,
+        isAnswer: "ready",
+        alert: true,
       };
     },
     methods: {
@@ -114,6 +113,7 @@
         this.log = "";
         this.history = [];
         this.alert = false;
+        this.isAnswer = "ready";
       },
     },
     created() {
