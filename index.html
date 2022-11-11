@@ -1,57 +1,69 @@
-<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
-<link
-  href="https://cdn.jsdelivr.net/npm/daisyui@2.39.0/dist/full.css"
-  rel="stylesheet"
-  type="text/css"
-/>
-<script src="https://cdn.tailwindcss.com"></script>
-
-<div id="app">
-  <div class="flex justify-end m-4">
-    <button class="btn btn-xs btn-error" @click="reset()">Reset</button>
-  </div>
-
-  <div class="divider">Score</div>
-  <div class="text-center">
-    <p class="text-6xl">{{ score }}</p>
-  </div>
-
-  <div class="divider">Question</div>
-  <div class="text-center">
-    <p class="text-9xl">{{ x }} + {{ y }}</p>
-  </div>
-
-  <div class="flex justify-center mt-10">
-    <input
-      type="number"
-      placeholder="정답 입력 후 엔터 또는 [확인] 클릭"
-      autofocus
-      class="input input-bordered input-lg w-full max-w-xs"
-      v-model="input"
-      @keydown.enter="checkAnswer()"
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <link
+      href="https://cdn.jsdelivr.net/npm/daisyui@2.39.0/dist/full.css"
+      rel="stylesheet"
+      type="text/css"
     />
-    <button class="btn btn-lg" @click="checkAnswer()">확인</button>
-  </div>
-  <div class="divider">History</div>
-  <div class="flex justify-center">
-    <ul>
-      <li v-for="log in history" class="badge badge-outlin m-1">{{ log }}</li>
-    </ul>
-  </div>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body>
+    <div id="app">
+      <div class="flex justify-end m-4">
+        <button class="btn btn-xs btn-error" @click="reset()">Reset</button>
+      </div>
 
-  <div class="toast" v-show="alert">
-    <div v-if="isAnswer" class="alert alert-success">
-      <div>
-        <span>맞았습니다😀</span>
+      <div class="divider">Score</div>
+      <div class="text-center">
+        <p class="text-6xl">{{ score }}</p>
+      </div>
+
+      <div class="divider">Question</div>
+      <div class="text-center">
+        <p class="text-9xl">{{ x }} + {{ y }}</p>
+      </div>
+
+      <div class="flex justify-center mt-10">
+        <input
+          type="number"
+          placeholder="정답 입력 후 엔터 또는 [확인] 클릭"
+          autofocus
+          class="input input-bordered input-lg w-full max-w-xs"
+          v-model="input"
+          @keydown.enter="checkAnswer()"
+        />
+        <button class="btn btn-lg" @click="checkAnswer()">확인</button>
+      </div>
+      <div class="divider">History</div>
+      <div class="flex justify-center">
+        <ul>
+          <li v-for="log in history" class="badge badge-outlin m-1">
+            {{ log }}
+          </li>
+        </ul>
+      </div>
+
+      <div class="toast" v-show="alert">
+        <div v-if="isAnswer" class="alert alert-success">
+          <div>
+            <span>맞았습니다😀</span>
+          </div>
+        </div>
+        <div v-else class="alert alert-error">
+          <div>
+            <span>틀렸습니다🥵</span>
+          </div>
+        </div>
       </div>
     </div>
-    <div v-else class="alert alert-error">
-      <div>
-        <span>틀렸습니다🥵</span>
-      </div>
-    </div>
-  </div>
-</div>
+  </body>
+</html>
 
 <script>
   const { createApp } = Vue;
